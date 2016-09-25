@@ -13,3 +13,9 @@ matchSuccess
     main.replaySoundMatch
     tiles.deleteMatched
     tiles.refreshAvailability
+    main.checkResult
+loss
+    main.replaySoundLoss
+    main.lose
+victory
+    main.replaySoundVictory

@@ -6,3 +6,7 @@ soundBuffer
             file = sounds/selection.ogg
         match
             file = sounds/cleaner.ogg
+        loss
+            file = sounds/loss.ogg
+        victory
+            file = sounds/victory.ogg

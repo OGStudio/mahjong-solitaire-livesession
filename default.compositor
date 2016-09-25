@@ -87,3 +87,33 @@ material
         tile09_selected
             diffuse = pipeline/textures/tile09_selected_diffuse.png
             normal = pipeline/textures/tile_normal.png
+        tile_loss_l
+            diffuse = pipeline/textures/tile_loss_l_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_loss_o
+            diffuse = pipeline/textures/tile_loss_o_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_loss_s
+            diffuse = pipeline/textures/tile_loss_s_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_v
+            diffuse = pipeline/textures/tile_victory_v_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_i
+            diffuse = pipeline/textures/tile_victory_i_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_c
+            diffuse = pipeline/textures/tile_victory_c_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_t
+            diffuse = pipeline/textures/tile_victory_t_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_o
+            diffuse = pipeline/textures/tile_victory_o_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_r
+            diffuse = pipeline/textures/tile_victory_r_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile_victory_y
+            diffuse = pipeline/textures/tile_victory_y_diffuse.png
+            normal = pipeline/textures/tile_normal.png

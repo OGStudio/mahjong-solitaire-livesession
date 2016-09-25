@@ -7,6 +7,7 @@ TILE_PREFIX_MATERIAL = "tile0"
 # MJIN2_FEATURE TILES_SELECTION/CONST
 # MJIN2_FEATURE TILES_SELECTION_MARK/CONST
 # MJIN2_FEATURE TILES_SELECTION_MATCH/CONST
+# MJIN2_FEATURE CHECK_RESULT/CONST
 
 class TilesImpl(object):
     def __init__(self, c, nodeName):
@@ -21,6 +22,7 @@ class TilesImpl(object):
         # MJIN2_FEATURE TILES_SELECTION/INIT
         # MJIN2_FEATURE TILES_SELECTION_MARK/INIT
         # MJIN2_FEATURE TILES_SELECTION_MATCH/INIT
+        # MJIN2_FEATURE CHECK_RESULT/INIT
     def __del__(self):
         self.c = None
     # MJIN2_FEATURE TILES_POSITION/IMPL
@@ -30,6 +32,7 @@ class TilesImpl(object):
     # MJIN2_FEATURE TILES_SELECTION/IMPL
     # MJIN2_FEATURE TILES_SELECTION_MARK/IMPL
     # MJIN2_FEATURE TILES_SELECTION_MATCH/IMPL
+    # MJIN2_FEATURE CHECK_RESULT/IMPL
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return

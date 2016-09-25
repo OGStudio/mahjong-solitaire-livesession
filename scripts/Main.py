@@ -7,7 +7,8 @@ MAIN_SOUND_START_API = "main.replaySoundStart"
 MAIN_SOUND_START     = "soundBuffer.default.start"
 # END FEATURE MAIN_SOUND_START
 # BEGIN FEATURE MAIN_LAYOUT
-MAIN_LAYOUT     = "X_shaped"
+#MAIN_LAYOUT     = "X_shaped"
+MAIN_LAYOUT     = "test"
 MAIN_LAYOUT_API = "main.loadLayout"
 MAIN_LAYOUT_DIR = "layouts"
 MAIN_LAYOUT_EXT = "layout"
@@ -31,6 +32,25 @@ MAIN_SOUND_SELECTION     = "soundBuffer.default.selection"
 MAIN_SOUND_MATCH_API = "main.replaySoundMatch"
 MAIN_SOUND_MATCH     = "soundBuffer.default.match"
 # END FEATURE MAIN_SOUND_MATCH
+# BEGIN FEATURE CHECK_RESULT
+MAIN_RESULT_API              = "main.checkResult"
+MAIN_RESULT_SEQUENCE_LOSS    = "sequence.default.loss"
+MAIN_RESULT_SEQUENCE_VICTORY = "sequence.default.victory"
+# END FEATURE CHECK_RESULT
+# BEGIN FEATURE MAIN_SOUND_LOSS_VICTORY
+MAIN_SOUND_LOSS_API    = "main.replaySoundLoss"
+MAIN_SOUND_LOSS        = "soundBuffer.default.loss"
+MAIN_SOUND_VICTORY_API = "main.replaySoundVictory"
+MAIN_SOUND_VICTORY     = "soundBuffer.default.victory"
+# END FEATURE MAIN_SOUND_LOSS_VICTORY
+# BEGIN FEATURE MAIN_LOSE_WIN
+MAIN_LOSE      = "rotate.default.lose"
+MAIN_LOSE_API  = "main.lose"
+MAIN_LOSE_NODE = "camera"
+MAIN_WIN       = "move.default.drop"
+MAIN_WIN_API   = "main.dropVictoryTile"
+MAIN_WIN_NODE  = "victory"
+# END FEATURE MAIN_LOSE_WIN
 
 class MainImpl(object):
     def __init__(self, c):
@@ -62,6 +82,27 @@ class MainImpl(object):
         self.c.setConst("SNDMATCH", MAIN_SOUND_MATCH)
         self.c.provide(MAIN_SOUND_MATCH_API, self.setReplaySoundMatch)
 # END FEATURE MAIN_SOUND_MATCH
+# BEGIN FEATURE CHECK_RESULT
+        self.c.provide(MAIN_RESULT_API, self.setCheckResult)
+        self.c.setConst("SEQLOSS",    MAIN_RESULT_SEQUENCE_LOSS)
+        self.c.setConst("SEQVICTORY", MAIN_RESULT_SEQUENCE_VICTORY)
+# END FEATURE CHECK_RESULT
+# BEGIN FEATURE MAIN_SOUND_LOSS_VICTORY
+        self.c.provide(MAIN_SOUND_LOSS_API,    self.setReplaySoundLoss)
+        self.c.provide(MAIN_SOUND_VICTORY_API, self.setReplaySoundVictory)
+        self.c.setConst("SNDLOSS",    MAIN_SOUND_LOSS)
+        self.c.setConst("SNDVICTORY", MAIN_SOUND_VICTORY)
+# END FEATURE MAIN_SOUND_LOSS_VICTORY
+# BEGIN FEATURE MAIN_LOSE_WIN
+        self.c.provide(MAIN_LOSE_API, self.setLose)
+        self.c.setConst("LOSE",      MAIN_LOSE)
+        self.c.setConst("LOSE_NODE", MAIN_LOSE_NODE)
+        self.c.provide(MAIN_WIN_API, self.setDropTile)
+        self.c.setConst("WIN",      MAIN_WIN)
+        self.c.setConst("WIN_NODE", MAIN_WIN_NODE)
+        self.c.listen("$WIN.$SCENE..active", "0", self.onDroppedTile)
+        self.vchildren = []
+# END FEATURE MAIN_LOSE_WIN
     def __del__(self):
         self.c = None
 # BEGIN FEATURE MAIN_SOUND_START
@@ -126,6 +167,41 @@ class MainImpl(object):
         self.c.set("$SNDMATCH.state", "play")
         self.c.report(MAIN_SOUND_MATCH_API, "0")
 # END FEATURE MAIN_SOUND_MATCH
+# BEGIN FEATURE CHECK_RESULT
+    def setCheckResult(self, key, value):
+        (hasTiles, hasMatches) = self.c.get("tiles.stats")
+        if (hasTiles == "0"):
+            print "Victory"
+            self.c.set("$SEQVICTORY.active", "1")
+        elif (hasMatches == "0"):
+            print "Loss"
+            self.c.set("$SEQLOSS.active", "1")
+        self.c.report(MAIN_RESULT_API, "0")
+# END FEATURE CHECK_RESULT
+# BEGIN FEATURE MAIN_SOUND_LOSS_VICTORY
+    def setReplaySoundLoss(self, key, value):
+        self.c.set("$SNDLOSS.state", "play")
+        self.c.report(MAIN_SOUND_LOSS_API, "0")
+    def setReplaySoundVictory(self, key, value):
+        self.c.set("$SNDVICTORY.state", "play")
+        self.c.report(MAIN_SOUND_VICTORY_API, "0")
+# END FEATURE MAIN_SOUND_LOSS_VICTORY
+# BEGIN FEATURE MAIN_LOSE_WIN
+    def locateChildrenOnce(self):
+        if (len(self.vchildren)):
+            return
+        self.vchildren = list(self.c.get("node.$SCENE.$WIN_NODE.children"))
+    def onDroppedTile(self, key, value):
+        self.c.report(MAIN_WIN_API, "0")
+    def setLose(self, key, value):
+        self.c.set("$LOSE.$SCENE.$LOSE_NODE.active", "1")
+        self.c.report(MAIN_LOSE_API, "0")
+    def setDropTile(self, key, value):
+        self.locateChildrenOnce()
+        child = self.vchildren.pop(0)
+        self.c.setConst("CHILD", child)
+        self.c.set("$WIN.$SCENE.$CHILD.active", "1")
+# END FEATURE MAIN_LOSE_WIN
     def onSpace(self, key, value):
         if self.isOn:
             return

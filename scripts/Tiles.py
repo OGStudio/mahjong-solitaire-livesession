@@ -19,6 +19,9 @@ TILE_DELETE_API             = "tiles.deleteMatched"
 TILE_MATCH_API              = "tiles.match"
 TILE_SEQUENCE_MATCH_SUCCESS = "sequence.default.matchSuccess"
 # END FEATURE TILES_SELECTION_MATCH
+# BEGIN FEATURE CHECK_RESULT
+TILES_STATS_API = "tiles.stats"
+# END FEATURE CHECK_RESULT
 
 class TilesImpl(object):
     def __init__(self, c, nodeName):
@@ -57,6 +60,9 @@ class TilesImpl(object):
         self.lastMatchedTile = None
         self.matchedTiles = []
 # END FEATURE TILES_SELECTION_MATCH
+# BEGIN FEATURE CHECK_RESULT
+        self.c.provide(TILES_STATS_API, None, self.stats)
+# END FEATURE CHECK_RESULT
     def __del__(self):
         self.c = None
 # BEGIN FEATURE TILES_POSITION
@@ -191,6 +197,25 @@ class TilesImpl(object):
             self.c.set("$SEQMATCH.active", "1")
         self.c.report(TILE_MATCH_API, "0")
 # END FEATURE TILES_SELECTION_MATCH
+# BEGIN FEATURE CHECK_RESULT
+    def stats(self, key):
+        hasTiles   = len(self.ids) > 0
+        hasMatches = False
+        # Find out if there is at least one pair
+        # of matching tiles available.
+        ids = { }
+        for tileName in self.available:
+            id = self.ids[tileName]
+            if (id not in ids):
+                ids[id] = 0
+            ids[id] = ids[id] + 1
+            # A pair has been found.
+            if (ids[id] > 1):
+                hasMatches = True
+                break
+        return ["1" if hasTiles else "0",
+                "1" if hasMatches else "0"]
+# END FEATURE CHECK_RESULT
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
