@@ -1,7 +1,8 @@
 # Provide "main.loadLayout.
 CLASS Main
     PART CONST
-        MAIN_LAYOUT     = "X_shaped"
+        #MAIN_LAYOUT     = "X_shaped"
+        MAIN_LAYOUT     = "test"
         MAIN_LAYOUT_API = "main.loadLayout"
         MAIN_LAYOUT_DIR = "layouts"
         MAIN_LAYOUT_EXT = "layout"
