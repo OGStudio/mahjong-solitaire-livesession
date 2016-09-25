@@ -8,6 +8,7 @@ LAYOUT_PREFIX_VERSION = "kmahjongg-layout-v"
 LAYOUT_PREFIX_DEPTH   = "d"
 LAYOUT_PREFIX_HEIGHT  = "h"
 LAYOUT_PREFIX_WIDTH   = "w"
+# MJIN2_FEATURE LAYOUT_ERRORS/CONST
 
 class LayoutImpl(object):
     def __init__(self, c):
@@ -15,16 +16,12 @@ class LayoutImpl(object):
         self.positions = []
         self.c.provide("layout.parseFileName", self.setParseFileName)
         self.c.provide("layout.positions", None, self.pos)
-# BEGIN FEATURE LAYOUT_DIMENSIONS
-        self.c.provide("layout.dimensions", None, self.dimensions)
-        self.dim = ["0", "0"]
-# END FEATURE LAYOUT_DIMENSIONS
+        # MJIN2_FEATURE LAYOUT_DIMENSIONS/INIT
+        # MJIN2_FEATURE LAYOUT_ERRORS/INIT
     def __del__(self):
         self.c = None
-# BEGIN FEATURE LAYOUT_DIMENSIONS
-    def dimensions(self, key):
-        return self.dim
-# END FEATURE LAYOUT_DIMENSIONS
+    # MJIN2_FEATURE LAYOUT_DIMENSIONS/IMPL
+    # MJIN2_FEATURE LAYOUT_ERRORS/IMPL
     def parseFields(self, fields, width, height):
         self.positions = []
         for i in xrange(0, len(fields)):
@@ -40,6 +37,7 @@ class LayoutImpl(object):
                                                                    row,
                                                                    column))
     def parseLines(self, lines):
+        # MJIN2_FEATURE LAYOUT_ERRORS/RESET
         # Field dimensions.
         depth  = 0
         height = LAYOUT_DEFAULT_HEIGHT
@@ -57,6 +55,7 @@ class LayoutImpl(object):
             # BEGIN Constants.
             if sln.startswith(LAYOUT_PREFIX_VERSION):
                 version = sln.split(LAYOUT_PREFIX_VERSION)[1]
+                # MJIN2_FEATURE LAYOUT_ERRORS/VERSION
             elif sln.startswith(LAYOUT_PREFIX_DEPTH):
                 depth = int(sln.split(LAYOUT_PREFIX_DEPTH)[1])
             elif sln.startswith(LAYOUT_PREFIX_HEIGHT):
@@ -75,11 +74,10 @@ class LayoutImpl(object):
                     fieldLines = []
                     fieldLineID = 0
             # END Field.
-# BEGIN FEATURE LAYOUT_DIMENSIONS
-        self.dim = [str(width),
-                    str(height)]
-# END FEATURE LAYOUT_DIMENSIONS
+        # MJIN2_FEATURE LAYOUT_DIMENSIONS/ASSIGN
+        # MJIN2_FEATURE LAYOUT_ERRORS/DEPTH
         self.parseFields(fields, width, height)
+        # MJIN2_FEATURE LAYOUT_ERRORS/EVEN
     def pos(self, key):
         return self.positions
     def setParseFileName(self, key, value):

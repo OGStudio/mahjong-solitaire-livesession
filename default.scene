@@ -8,9 +8,16 @@ node
             script = scripts/Main.py
         camera
             parent = ROOT
-            position = -0.958163 -6.873294 2.654914
-            rotation = 73.499695 0.000000 -7.399796
+            position = 0.000000 -1.800000 2.550000
+            rotation = 35.000000 0.000000 0.000000
             script = scripts/CameraSync.py
         layout
             parent = ROOT
             script = scripts/Layout.py
+        tiles
+            parent = ROOT
+            script = scripts/Tiles.py
+        field
+            material = field
+            model = models/field.osgt
+            parent = ROOT

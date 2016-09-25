@@ -1,8 +1,11 @@
 template
     main
         texture = textureTemplate
-#material
-#    main
-#        ball
-#            diffuse = pipeline/textures/ball_tex.png
-#            normal = pipeline/textures/ball_n.png
+material
+    main
+        field
+            diffuse = pipeline/textures/field_diffuse.png
+            normal = pipeline/textures/field_normal.png
+        tile01
+            diffuse = pipeline/textures/tile01_diffuse.png
+            normal = pipeline/textures/tile_normal.png

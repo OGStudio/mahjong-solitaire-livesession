@@ -16,6 +16,9 @@ MAIN_RESOLVER   = "pathResolver.MainResolver"
 # BEGIN FEATURE MAIN_LAYOUT_TILES
 MAIN_LAYOUT_TILES_API = "main.createTiles"
 # END FEATURE MAIN_LAYOUT_TILES
+# BEGIN FEATURE CENTER_TILES
+MAIN_CENTER_TILES_API = "main.centerTiles"
+# END FEATURE CENTER_TILES
 
 class MainImpl(object):
     def __init__(self, c):
@@ -33,6 +36,9 @@ class MainImpl(object):
 # BEGIN FEATURE MAIN_LAYOUT_TILES
         self.c.provide(MAIN_LAYOUT_TILES_API, self.setCreateTiles)
 # END FEATURE MAIN_LAYOUT_TILES
+# BEGIN FEATURE CENTER_TILES
+        self.c.provide(MAIN_CENTER_TILES_API, self.setCenterTiles)
+# END FEATURE CENTER_TILES
     def __del__(self):
         self.c = None
 # BEGIN FEATURE MAIN_SOUND_START
@@ -59,6 +65,12 @@ class MainImpl(object):
             self.c.set("tile.$TILE.position", p)
         self.c.report(MAIN_LAYOUT_TILES_API, "0")
 # END FEATURE MAIN_LAYOUT_TILES
+# BEGIN FEATURE CENTER_TILES
+    def setCenterTiles(self, key, value):
+        dim = self.c.get("layout.dimensions")
+        self.c.set("tiles.center", dim)
+        self.c.report(MAIN_CENTER_TILES_API, "0")
+# END FEATURE CENTER_TILES
     def onSpace(self, key, value):
         if self.isOn:
             return

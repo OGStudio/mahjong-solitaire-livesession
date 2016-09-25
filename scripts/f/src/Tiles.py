@@ -10,33 +10,12 @@ class TilesImpl(object):
         self.nodeParent = nodeName
         self.tiles = { }
         self.c.provide("tile..position", self.setPosition)
-# BEGIN FEATURE TILES_POSITION
-        # Tile dimensions.
-        self.tileDim = []
-# END FEATURE TILES_POSITION
-# BEGIN FEATURE CENTER_TILES
-        self.c.provide("tiles.center", self.setCenter)
-# END FEATURE CENTER_TILES
+        # MJIN2_FEATURE TILES_POSITION/INIT
+        # MJIN2_FEATURE CENTER_TILES/INIT
     def __del__(self):
         self.c = None
-# BEGIN FEATURE TILES_POSITION
-    def calculateTileDimOnce(self):
-        if (len(self.tileDim)):
-            return
-        bb = self.c.get("node.$SCENE.$TILE.bbox")[0].split(" ")
-        self.tileDim = [float(bb[1]) - float(bb[0]),
-                        float(bb[3]) - float(bb[2]),
-                        float(bb[5]) - float(bb[4])]
-# END FEATURE TILES_POSITION
-# BEGIN FEATURE CENTER_TILES
-    def setCenter(self, key, value):
-        w = int(value[0])
-        h = int(value[1])
-        offset = (w / 2.0 * self.tileDim[0] / 2.0,
-                  h / 2.0 * self.tileDim[1] / 2.0 - self.tileDim[1])
-        pos = "{0} {1} 0".format(-offset[0], -offset[1])
-        self.c.set("node.$SCENE.$NODE.position", pos)
-# END FEATURE CENTER_TILES
+    # MJIN2_FEATURE TILES_POSITION/IMPL
+    # MJIN2_FEATURE CENTER_TILES/IMPL
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
@@ -55,14 +34,7 @@ class TilesImpl(object):
         # Convert "depth row column" into "x y z".
         p = value[0].split(" ")
         pos = "{0} {1} {2}".format(p[2], p[1], p[0])
-# BEGIN FEATURE TILES_POSITION
-        self.calculateTileDimOnce()
-        k = 0.5
-        x = float(p[2]) * self.tileDim[0] * k
-        y = float(p[1]) * self.tileDim[1] * k
-        z = float(p[0]) * self.tileDim[2]
-        pos = "{0} {1} {2}".format(x, y, z)
-# END FEATURE TILES_POSITION
+        # MJIN2_FEATURE TILES_POSITION/TRANSLATE
         self.c.set("node.$SCENE.$TILE.position", pos)
 
 class Tiles(object):
