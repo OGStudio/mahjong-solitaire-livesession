@@ -7,8 +7,7 @@ MAIN_SOUND_START_API = "main.replaySoundStart"
 MAIN_SOUND_START     = "soundBuffer.default.start"
 # END FEATURE MAIN_SOUND_START
 # BEGIN FEATURE MAIN_LAYOUT
-#MAIN_LAYOUT     = "X_shaped"
-MAIN_LAYOUT     = "test"
+MAIN_LAYOUT     = "X_shaped"
 MAIN_LAYOUT_API = "main.loadLayout"
 MAIN_LAYOUT_DIR = "layouts"
 MAIN_LAYOUT_EXT = "layout"
