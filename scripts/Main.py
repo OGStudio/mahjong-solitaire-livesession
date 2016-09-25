@@ -23,6 +23,10 @@ MAIN_CENTER_TILES_API = "main.centerTiles"
 MAIN_TILE_IDS     = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 MAIN_TILE_IDS_API = "main.identifyTiles"
 # END FEATURE IDENTIFY_TILES
+# BEGIN FEATURE MAIN_SOUND_SELECTION
+MAIN_SOUND_SELECTION_API = "main.replaySoundSelection"
+MAIN_SOUND_SELECTION     = "soundBuffer.default.selection"
+# END FEATURE MAIN_SOUND_SELECTION
 
 class MainImpl(object):
     def __init__(self, c):
@@ -46,6 +50,10 @@ class MainImpl(object):
 # BEGIN FEATURE IDENTIFY_TILES
         self.c.provide(MAIN_TILE_IDS_API, self.setIdentifyTiles)
 # END FEATURE IDENTIFY_TILES
+# BEGIN FEATURE MAIN_SOUND_SELECTION
+        self.c.setConst("SNDSELECTION", MAIN_SOUND_SELECTION)
+        self.c.provide(MAIN_SOUND_SELECTION_API, self.setReplaySoundSelection)
+# END FEATURE MAIN_SOUND_SELECTION
     def __del__(self):
         self.c = None
 # BEGIN FEATURE MAIN_SOUND_START
@@ -100,6 +108,11 @@ class MainImpl(object):
             del vpos[positionID]
         self.c.report(MAIN_TILE_IDS_API, "0")
 # END FEATURE IDENTIFY_TILES
+# BEGIN FEATURE MAIN_SOUND_SELECTION
+    def setReplaySoundSelection(self, key, value):
+        self.c.set("$SNDSELECTION.state", "play")
+        self.c.report(MAIN_SOUND_SELECTION_API, "0")
+# END FEATURE MAIN_SOUND_SELECTION
     def onSpace(self, key, value):
         if self.isOn:
             return

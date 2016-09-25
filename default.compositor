@@ -60,3 +60,30 @@ material
         tile09_unavailable
             diffuse = pipeline/textures/tile09_unavailable_diffuse.png
             normal = pipeline/textures/tile_normal.png
+        tile01_selected
+            diffuse = pipeline/textures/tile01_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile02_selected
+            diffuse = pipeline/textures/tile02_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile03_selected
+            diffuse = pipeline/textures/tile03_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile04_selected
+            diffuse = pipeline/textures/tile04_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile05_selected
+            diffuse = pipeline/textures/tile05_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile06_selected
+            diffuse = pipeline/textures/tile06_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile07_selected
+            diffuse = pipeline/textures/tile07_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile08_selected
+            diffuse = pipeline/textures/tile08_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile09_selected
+            diffuse = pipeline/textures/tile09_selected_diffuse.png
+            normal = pipeline/textures/tile_normal.png

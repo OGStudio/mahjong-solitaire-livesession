@@ -5,3 +5,6 @@ start
     main.centerTiles
     main.identifyTiles
     tiles.refreshAvailability
+tileSelection
+    main.replaySoundSelection
+    tiles.markSelectedTile

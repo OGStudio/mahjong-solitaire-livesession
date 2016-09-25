@@ -4,6 +4,8 @@ from pymjin2 import *
 TILE_MODEL           = "models/tile.osgt"
 TILE_PREFIX_MATERIAL = "tile0"
 # MJIN2_FEATURE TILES_AVAILABILITY/CONST
+# MJIN2_FEATURE TILES_SELECTION/CONST
+# MJIN2_FEATURE TILES_SELECTION_MARK/CONST
 
 class TilesImpl(object):
     def __init__(self, c, nodeName):
@@ -15,12 +17,16 @@ class TilesImpl(object):
         # MJIN2_FEATURE CENTER_TILES/INIT
         # MJIN2_FEATURE IDENTIFY_TILES/INIT
         # MJIN2_FEATURE TILES_AVAILABILITY/INIT
+        # MJIN2_FEATURE TILES_SELECTION/INIT
+        # MJIN2_FEATURE TILES_SELECTION_MARK/INIT
     def __del__(self):
         self.c = None
     # MJIN2_FEATURE TILES_POSITION/IMPL
     # MJIN2_FEATURE CENTER_TILES/IMPL
     # MJIN2_FEATURE IDENTIFY_TILES/IMPL
     # MJIN2_FEATURE TILES_AVAILABILITY/IMPL
+    # MJIN2_FEATURE TILES_SELECTION/IMPL
+    # MJIN2_FEATURE TILES_SELECTION_MARK/IMPL
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
@@ -34,6 +40,7 @@ class TilesImpl(object):
         self.c.set("node.$SCENE.$TILE.parent", "")
         # MJIN2_FEATURE IDENTIFY_TILES/DELETE
         # MJIN2_FEATURE TILES_AVAILABILITY/DELETE
+        # MJIN2_FEATURE TILES_SELECTION_MARK/DELETE
     def setPosition(self, key, value):
         tileName = key[1]
         self.c.setConst("TILE", tileName)

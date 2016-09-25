@@ -7,6 +7,13 @@ TILE_PREFIX_MATERIAL = "tile0"
 TILES_AVAILABILITY_API    = "tiles.refreshAvailability"
 TILE_MATERIAL_UNAVAILABLE = "tile0{0}_unavailable"
 # END FEATURE TILES_AVAILABILITY
+# BEGIN FEATURE TILES_SELECTION
+TILE_SEQUENCE_SELECTION = "sequence.default.tileSelection"
+# END FEATURE TILES_SELECTION
+# BEGIN FEATURE TILES_SELECTION_MARK
+TILE_MARKED_API      = "tiles.markSelectedTile"
+TILE_MARKED_MATERIAL = "tile0{0}_selected"
+# END FEATURE TILES_SELECTION_MARK
 
 class TilesImpl(object):
     def __init__(self, c, nodeName):
@@ -29,6 +36,15 @@ class TilesImpl(object):
         self.c.provide(TILES_AVAILABILITY_API, self.setRefreshAvailability)
         self.available = {}
 # END FEATURE TILES_AVAILABILITY
+# BEGIN FEATURE TILES_SELECTION
+        self.c.setConst("SEQSELECT", TILE_SEQUENCE_SELECTION)
+        self.c.listen("node.$SCENE..selected", None, self.onTileSelection)
+        self.lastSelectedTile = None
+# END FEATURE TILES_SELECTION
+# BEGIN FEATURE TILES_SELECTION_MARK
+        self.c.provide(TILE_MARKED_API, self.setMarkSelectedTile)
+        self.lastMarkedTile = None
+# END FEATURE TILES_SELECTION_MARK
     def __del__(self):
         self.c = None
 # BEGIN FEATURE TILES_POSITION
@@ -111,6 +127,33 @@ class TilesImpl(object):
         # Tile is free.
         return True
 # END FEATURE TILES_AVAILABILITY
+# BEGIN FEATURE TILES_SELECTION
+    def onTileSelection(self, key, value):
+        self.lastSelectedTile = key[2]
+        self.c.set("$SEQSELECT.active", "1")
+# END FEATURE TILES_SELECTION
+# BEGIN FEATURE TILES_SELECTION_MARK
+    def setMarkSelectedTile(self, key, value):
+        tileName = self.lastSelectedTile
+        if (self.lastMarkedTile):
+            # Do nothing.
+            if (tileName == self.lastMarkedTile):
+                self.c.report(TILE_MARKED_API, "0")
+                return
+            # Deselect previously selected tile.
+            self.setTileMarked(self.lastMarkedTile, False)
+        # Select tile.
+        self.setTileMarked(tileName, True)
+        self.lastMarkedTile = tileName
+        self.c.report(TILE_MARKED_API, "0")
+    def setTileMarked(self, tileName, state):
+        id = self.ids[tileName]
+        mat = TILE_PREFIX_MATERIAL + str(id)
+        if (state):
+            mat = TILE_MARKED_MATERIAL.format(id)
+        self.c.setConst("TILE", tileName)
+        self.c.set("node.$SCENE.$TILE.material", mat)
+# END FEATURE TILES_SELECTION_MARK
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
@@ -128,6 +171,11 @@ class TilesImpl(object):
 # BEGIN FEATURE TILES_AVAILABILITY
         del self.available[tileName]
 # END FEATURE TILES_AVAILABILITY
+# BEGIN FEATURE TILES_SELECTION_MARK
+        if (self.lastMarkedTile and
+            (self.lastMarkedTile == tileName)):
+            self.lastMarkedTile = None
+# END FEATURE TILES_SELECTION_MARK
     def setPosition(self, key, value):
         tileName = key[1]
         self.c.setConst("TILE", tileName)
