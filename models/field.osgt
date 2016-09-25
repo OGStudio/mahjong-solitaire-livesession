@@ -1,0 +1,72 @@
+#Ascii Scene
+#Version 92
+#Generator osgexport 0.13.0
+
+osg::Group {
+  UniqueID 9
+  Name "Root"
+  Children 1 {
+    osg::MatrixTransform {
+      UniqueID 5
+      Name "BaseField"
+      Children 1 {
+        osg::Geode {
+          UniqueID 8
+          Name "GeodePlane.005"
+          Drawables 1 {
+            osg::Geometry {
+              UniqueID 7
+              Name "BaseField"
+              PrimitiveSetList 1 {
+                  DrawElementsUInt GL_QUADS 4 {
+                    0 1 2 3 
+                  }
+              }
+              VertexData {
+                Array TRUE ArrayID 3 Vec3fArray 4 {
+                  -1.00000 -0.80000 0.00000
+                  1.00000 -0.80000 0.00000
+                  1.00000 0.80000 0.00000
+                  -1.00000 0.80000 0.00000
+                }
+                Indices FALSE
+                Binding BIND_PER_VERTEX
+                Normalize 0
+              }
+              NormalData {
+                Array TRUE ArrayID 4 Vec3fArray 4 {
+                  0.00000 0.00000 1.00000
+                  0.00000 0.00000 1.00000
+                  0.00000 0.00000 1.00000
+                  0.00000 0.00000 1.00000
+                }
+                Indices FALSE
+                Binding BIND_PER_VERTEX
+                Normalize 0
+              }
+              TexCoordData 1 {
+                Data {
+                  Array TRUE ArrayID 5 Vec2fArray 4 {
+                    0.00000 1.00000
+                    0.00000 0.00000
+                    1.00000 0.00000
+                    1.00000 1.00000
+                  }
+                  Indices FALSE
+                  Binding BIND_PER_VERTEX
+                  Normalize 0
+                }
+              }
+            }
+          }
+        }
+      }
+      Matrix {
+        1.00000 0.00000 0.00000 0.00000
+        0.00000 1.00000 0.00000 0.00000
+        0.00000 0.00000 1.00000 0.00000
+        0.00000 0.00000 0.00000 1.00000
+      }
+    }
+  }
+}

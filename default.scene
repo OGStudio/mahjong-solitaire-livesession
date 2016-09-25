@@ -11,3 +11,6 @@ node
             position = -0.958163 -6.873294 2.654914
             rotation = 73.499695 0.000000 -7.399796
             script = scripts/CameraSync.py
+        layout
+            parent = ROOT
+            script = scripts/Layout.py

@@ -1,0 +1,4 @@
+start
+    main.replaySoundStart
+    main.loadLayout
+    main.createTiles
