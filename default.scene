@@ -21,3 +21,67 @@ node
             material = field
             model = models/field.osgt
             parent = ROOT
+        loss
+            parent = ROOT
+            position = -1.500000 -2.090000 0.800000
+            rotation = 40.000000 0.000000 90.000000
+        lossL
+            material = tile_loss_l
+            model = models/tile.osgt
+            parent = loss
+        lossO
+            material = tile_loss_o
+            model = models/tile.osgt
+            parent = loss
+            position = 0.150000 0.000000 0.000000
+        lossS
+            material = tile_loss_s
+            model = models/tile.osgt
+            parent = loss
+            position = 0.300000 0.000000 0.000000
+        lossS2
+            material = tile_loss_s
+            model = models/tile.osgt
+            parent = loss
+            position = 0.450000 0.000000 0.000000
+        victory
+            parent = ROOT
+            position = -0.510000 0.000000 2.000000
+        victory1
+            material = tile_victory_v
+            model = models/tile.osgt
+            parent = victory
+            position = 0.000000 0.300000 0.000000
+        victory2
+            material = tile_victory_i
+            model = models/tile.osgt
+            parent = victory
+            position = 0.150000 0.200000 0.000000
+        victory3
+            material = tile_victory_c
+            model = models/tile.osgt
+            parent = victory
+            position = 0.300000 0.100000 0.000000
+        victory4
+            material = tile_victory_t
+            model = models/tile.osgt
+            parent = victory
+            position = 0.450000 0.000000 0.000000
+        victory5
+            material = tile_victory_o
+            model = models/tile.osgt
+            parent = victory
+            position = 0.600000 0.100000 0.000000
+        victory6
+            material = tile_victory_r
+            model = models/tile.osgt
+            parent = victory
+            position = 0.750000 0.200000 0.000000
+        victory7
+            material = tile_victory_y
+            model = models/tile.osgt
+            parent = victory
+            position = 0.900000 0.300000 0.000000
+        shadowFix
+            model = models/tile.osgt
+            parent = victory

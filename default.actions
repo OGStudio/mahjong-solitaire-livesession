@@ -3,3 +3,10 @@ rotate
         lose
             point = 0 0 0 0
             point = 1000 0 0 90
+move
+    default
+        drop
+            point = 0 0 0 0
+            point = 200 0 0 -2
+            point = 70 0 0 -1.9
+            point = 30 0 0 -2
