@@ -4,3 +4,4 @@ start
     main.createTiles
     main.centerTiles
     main.identifyTiles
+    tiles.refreshAvailability
