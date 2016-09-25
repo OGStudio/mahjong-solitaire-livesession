@@ -4,3 +4,5 @@ soundBuffer
             file = sounds/start.ogg
         selection
             file = sounds/selection.ogg
+        match
+            file = sounds/cleaner.ogg

@@ -14,6 +14,11 @@ TILE_SEQUENCE_SELECTION = "sequence.default.tileSelection"
 TILE_MARKED_API      = "tiles.markSelectedTile"
 TILE_MARKED_MATERIAL = "tile0{0}_selected"
 # END FEATURE TILES_SELECTION_MARK
+# BEGIN FEATURE TILES_SELECTION_MATCH
+TILE_DELETE_API             = "tiles.deleteMatched"
+TILE_MATCH_API              = "tiles.match"
+TILE_SEQUENCE_MATCH_SUCCESS = "sequence.default.matchSuccess"
+# END FEATURE TILES_SELECTION_MATCH
 
 class TilesImpl(object):
     def __init__(self, c, nodeName):
@@ -45,6 +50,13 @@ class TilesImpl(object):
         self.c.provide(TILE_MARKED_API, self.setMarkSelectedTile)
         self.lastMarkedTile = None
 # END FEATURE TILES_SELECTION_MARK
+# BEGIN FEATURE TILES_SELECTION_MATCH
+        self.c.provide(TILE_DELETE_API, self.setDelete)
+        self.c.provide(TILE_MATCH_API, self.setMatch)
+        self.c.setConst("SEQMATCH", TILE_SEQUENCE_MATCH_SUCCESS)
+        self.lastMatchedTile = None
+        self.matchedTiles = []
+# END FEATURE TILES_SELECTION_MATCH
     def __del__(self):
         self.c = None
 # BEGIN FEATURE TILES_POSITION
@@ -154,6 +166,31 @@ class TilesImpl(object):
         self.c.setConst("TILE", tileName)
         self.c.set("node.$SCENE.$TILE.material", mat)
 # END FEATURE TILES_SELECTION_MARK
+# BEGIN FEATURE TILES_SELECTION_MATCH
+    def setDelete(self, key, value):
+        for tileName in self.matchedTiles:
+            self.deleteTile(tileName)
+        self.c.report(TILE_DELETE_API, "0")
+    def setMatch(self, key, value):
+        self.matchedTiles = []
+        # Try to match.
+        if (self.lastMatchedTile):
+            # Do nothing.
+            if (self.lastMatchedTile == self.lastSelectedTile):
+                self.c.report(TILE_MATCH_API, "0")
+                return
+            id1 = self.ids[self.lastMatchedTile]
+            id2 = self.ids[self.lastSelectedTile]
+            # Successful match.
+            if (id1 == id2):
+                self.matchedTiles = [self.lastMatchedTile,
+                                     self.lastSelectedTile]
+        self.lastMatchedTile = self.lastSelectedTile
+        # Report match.
+        if (len(self.matchedTiles)):
+            self.c.set("$SEQMATCH.active", "1")
+        self.c.report(TILE_MATCH_API, "0")
+# END FEATURE TILES_SELECTION_MATCH
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
@@ -176,6 +213,11 @@ class TilesImpl(object):
             (self.lastMarkedTile == tileName)):
             self.lastMarkedTile = None
 # END FEATURE TILES_SELECTION_MARK
+# BEGIN FEATURE TILES_SELECTION_MATCH
+        if (self.lastMatchedTile and
+            (self.lastMatchedTile == tileName)):
+            self.lastMatchedTile = None
+# END FEATURE TILES_SELECTION_MATCH
     def setPosition(self, key, value):
         tileName = key[1]
         self.c.setConst("TILE", tileName)

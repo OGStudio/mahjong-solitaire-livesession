@@ -8,3 +8,8 @@ start
 tileSelection
     main.replaySoundSelection
     tiles.markSelectedTile
+    tiles.match
+matchSuccess
+    main.replaySoundMatch
+    tiles.deleteMatched
+    tiles.refreshAvailability
