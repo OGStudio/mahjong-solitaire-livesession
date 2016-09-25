@@ -3,3 +3,4 @@ start
     main.loadLayout
     main.createTiles
     main.centerTiles
+    main.identifyTiles

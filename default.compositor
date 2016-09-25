@@ -9,3 +9,27 @@ material
         tile01
             diffuse = pipeline/textures/tile01_diffuse.png
             normal = pipeline/textures/tile_normal.png
+        tile02
+            diffuse = pipeline/textures/tile02_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile03
+            diffuse = pipeline/textures/tile03_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile04
+            diffuse = pipeline/textures/tile04_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile05
+            diffuse = pipeline/textures/tile05_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile06
+            diffuse = pipeline/textures/tile06_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile07
+            diffuse = pipeline/textures/tile07_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile08
+            diffuse = pipeline/textures/tile08_diffuse.png
+            normal = pipeline/textures/tile_normal.png
+        tile09
+            diffuse = pipeline/textures/tile09_diffuse.png
+            normal = pipeline/textures/tile_normal.png

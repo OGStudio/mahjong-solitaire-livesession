@@ -19,6 +19,10 @@ MAIN_LAYOUT_TILES_API = "main.createTiles"
 # BEGIN FEATURE CENTER_TILES
 MAIN_CENTER_TILES_API = "main.centerTiles"
 # END FEATURE CENTER_TILES
+# BEGIN FEATURE IDENTIFY_TILES
+MAIN_TILE_IDS     = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+MAIN_TILE_IDS_API = "main.identifyTiles"
+# END FEATURE IDENTIFY_TILES
 
 class MainImpl(object):
     def __init__(self, c):
@@ -39,6 +43,9 @@ class MainImpl(object):
 # BEGIN FEATURE CENTER_TILES
         self.c.provide(MAIN_CENTER_TILES_API, self.setCenterTiles)
 # END FEATURE CENTER_TILES
+# BEGIN FEATURE IDENTIFY_TILES
+        self.c.provide(MAIN_TILE_IDS_API, self.setIdentifyTiles)
+# END FEATURE IDENTIFY_TILES
     def __del__(self):
         self.c = None
 # BEGIN FEATURE MAIN_SOUND_START
@@ -71,6 +78,28 @@ class MainImpl(object):
         self.c.set("tiles.center", dim)
         self.c.report(MAIN_CENTER_TILES_API, "0")
 # END FEATURE CENTER_TILES
+# BEGIN FEATURE IDENTIFY_TILES
+    def setIdentifyTiles(self, key, value):
+        positions = self.c.get("layout.positions")
+        i = 1
+        vpos = list(positions)
+        # Distribute IDs so that each ID has a pair.
+        while (len(vpos)):
+            i = i + 1
+            positionID = rand() % len(vpos)
+            idsID = i / 2 - 1
+            # Reset i.
+            if (idsID >= len(MAIN_TILE_IDS)):
+                i = 2
+                idsID = 0
+            pos = vpos[positionID]
+            id = MAIN_TILE_IDS[idsID]
+            # Assign.
+            self.c.setConst("TILE", pos)
+            self.c.set("tile.$TILE.id", str(id))
+            del vpos[positionID]
+        self.c.report(MAIN_TILE_IDS_API, "0")
+# END FEATURE IDENTIFY_TILES
     def onSpace(self, key, value):
         if self.isOn:
             return

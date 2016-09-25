@@ -12,10 +12,12 @@ class TilesImpl(object):
         self.c.provide("tile..position", self.setPosition)
         # MJIN2_FEATURE TILES_POSITION/INIT
         # MJIN2_FEATURE CENTER_TILES/INIT
+        # MJIN2_FEATURE IDENTIFY_TILES/INIT
     def __del__(self):
         self.c = None
     # MJIN2_FEATURE TILES_POSITION/IMPL
     # MJIN2_FEATURE CENTER_TILES/IMPL
+    # MJIN2_FEATURE IDENTIFY_TILES/IMPL
     def createTileOnce(self, tileName):
         if (tileName in self.tiles):
             return
@@ -27,6 +29,7 @@ class TilesImpl(object):
     def deleteTile(self, tileName):
         self.c.setConst("TILE", tileName)
         self.c.set("node.$SCENE.$TILE.parent", "")
+        # MJIN2_FEATURE IDENTIFY_TILES/DELETE
     def setPosition(self, key, value):
         tileName = key[1]
         self.c.setConst("TILE", tileName)
