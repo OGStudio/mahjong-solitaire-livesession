@@ -11,8 +11,7 @@ Materials
 
 ![Short preview](img/ls.gif)
 
-This YouTube playlist depicts the whole process of creating the project from
-scratch with OGS Editor 0.10: https://youtu.be/g8Tyj_YH2Qc?list=PLWMTZqE4MAMJzBnXS9qU_ObWnzJuskI3F
+- The whole process of creating the project from scratch: https://youtu.be/g8Tyj_YH2Qc?list=PLWMTZqE4MAMJzBnXS9qU_ObWnzJuskI3F
 
 - OGS Editor 0.10 for Linux (Debian based) and Windows:
   https://sourceforge.net/projects/osrpgcreation/files/Editor/jenkins/51_2016-10-01_06-39-48_0.10.0/
